@@ -6,6 +6,9 @@ public class BallCollision : MonoBehaviour {
 
 	[SerializeField]
 	private Renderer _rend;
+    private MeshRenderer _neuronRenderer;
+
+    private Neuron _neuron;
 
 	[SerializeField]
 	private Renderer _playerRenderer;
@@ -15,17 +18,22 @@ public class BallCollision : MonoBehaviour {
 	private Color _originalColor;
 	private float _duration = 1.0F;
 
+    private Color _originalNeuronColor;
+
 	[SerializeField]
 	private float _emission = 5.0f;
 	[SerializeField]
 	private float _speed = 1f;
 
 	private Coroutine _collisionAnimation = null;
+    private Coroutine _neuronCollisionAnimation = null;
 
 	// Use this for initialization
 	void Start () {
 		_baseColor = _rend.material.color;
 		_originalColor = _rend.material.color;
+        _neuron = GetComponentInChildren<Neuron>();
+        _neuronRenderer = _neuron.GetMeshRenderer();
 	}
 	
 	// Update is called once per frame
@@ -49,6 +57,17 @@ public class BallCollision : MonoBehaviour {
 				_originalColor = _rend.material.color;
 				_collisionAnimation = StartCoroutine (TriggerCollisionAnimation (otherRend.material.color));
 			}
+            // Handling neuron layer
+            if(_neuronCollisionAnimation != null)
+            {
+                StopCoroutine(_neuronCollisionAnimation);
+                _neuronCollisionAnimation = null;
+            } else
+            {
+                Renderer otherRend = other.gameObject.GetComponent<Renderer>();
+                _originalNeuronColor = _neuron.GetMKGlowColor();
+                _neuronCollisionAnimation = StartCoroutine(TriggerNeuronCollisionAnimation(otherRend.material.color));
+            }
 		}
 	}
 
@@ -64,4 +83,17 @@ public class BallCollision : MonoBehaviour {
 			yield return null;
 		}
 	}
+
+    IEnumerator TriggerNeuronCollisionAnimation(Color _targetColor)
+    {
+        while (_neuronRenderer.material.color != _targetColor)
+        {
+            _elapsedTime += Time.deltaTime;
+            float lerp = (_speed * _elapsedTime) / _duration;
+            //			if (lerp >= 0.5f)
+            //				yield break;
+            _neuron.SetMKGlowColor(Color.Lerp(_originalNeuronColor, _targetColor, lerp));
+            yield return null;
+        }
+    }
 }

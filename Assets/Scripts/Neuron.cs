@@ -42,6 +42,11 @@ public class Neuron : MonoBehaviour {
         mRender.material.SetColor(Constants.MK_GLOW_COL, color);
     }
 
+    public Color GetMKGlowColor()
+    {
+        return mRender.material.GetColor(Constants.MK_GLOW_COL);
+    }
+
     public void SetMKGlowTextureColor(Color color)
     {
         mRender.material.SetColor(Constants.MK_GLOW_TEX_COL, color);
@@ -55,5 +60,10 @@ public class Neuron : MonoBehaviour {
     public void SetMKGlowTextureStrength(float glowTexStr)
     {
         mRender.material.SetFloat(Constants.MK_GLOW_TEX_STR, glowTexStr);
+    }
+
+    public MeshRenderer GetMeshRenderer()
+    {
+        return mRender;
     }
 }
