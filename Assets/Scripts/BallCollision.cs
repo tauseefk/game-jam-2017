@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collision : MonoBehaviour {
+public class BallCollision : MonoBehaviour {
 
 	[SerializeField]
 	private Renderer _rend;
@@ -32,7 +32,7 @@ public class Collision : MonoBehaviour {
 		
 	}
 
-	void OnTriggerEnter(Collider other) {
+	void OnCollisionEnter(Collision other) {
 		if (LayerMask.NameToLayer("Player") == other.gameObject.layer) {
 //			_playerRenderer = other.gameObject.GetComponent<Renderer>;
 			if (_collisionAnimation != null) {
@@ -41,7 +41,6 @@ public class Collision : MonoBehaviour {
 				_collisionAnimation = null;
 			} else {
 				_collisionAnimation = StartCoroutine (TriggerCollisionAnimation (_playerRenderer.material.color));
-
 			}
 		}
 	}
@@ -52,7 +51,7 @@ public class Collision : MonoBehaviour {
 		{
 			_elapsedTime += Time.deltaTime;
 			float lerp = (_speed * _elapsedTime) / _duration;
-			if (lerp >= .5f)
+			if (lerp >= 0.8f)
 				yield break;
 			_rend.material.color = Color.Lerp(_baseColor, _targetColor * _emission, lerp);
 			yield return null;
