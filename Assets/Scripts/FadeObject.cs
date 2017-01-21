@@ -19,7 +19,7 @@ public class FadeObject : MonoBehaviour {
 
     IEnumerator FadeOut ()
     {
-        yield return new WaitForSeconds(25f);
+//        yield return new WaitForSeconds(25f);
         while(_renderer.material.color.a >= 0)
         {
             _color.a -= 0.01f;

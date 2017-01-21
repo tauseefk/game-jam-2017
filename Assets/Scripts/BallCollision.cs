@@ -35,6 +35,9 @@ public class BallCollision : MonoBehaviour {
 	void OnCollisionEnter(Collision other) {
 		if (LayerMask.NameToLayer("Player") == other.gameObject.layer) {
 //			_playerRenderer = other.gameObject.GetComponent<Renderer>;
+			Shrink shrinkScript = other.gameObject.GetComponentInChildren<Shrink>();
+			shrinkScript.enabled = true;
+
 			if (_collisionAnimation != null) {
 				StopCoroutine (_collisionAnimation);
 				_elapsedTime = 0f;
