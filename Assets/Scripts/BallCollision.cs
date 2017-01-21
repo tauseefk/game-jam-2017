@@ -33,19 +33,19 @@ public class BallCollision : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other) {
-		if (LayerMask.NameToLayer("Player") == other.gameObject.layer) {
+		if (LayerMask.NameToLayer ("Player") == other.gameObject.layer) {
 //			_playerRenderer = other.gameObject.GetComponent<Renderer>;
-			Shrink shrinkScript = other.gameObject.GetComponentInChildren<Shrink>();
+			Shrink shrinkScript = other.gameObject.GetComponent<Shrink> ();
 			shrinkScript.enabled = true;
-
+		}
 			if (_collisionAnimation != null) {
 				StopCoroutine (_collisionAnimation);
-				_elapsedTime = 0f;
+//				_elapsedTime = 0f;
 				_collisionAnimation = null;
 			} else {
 				_collisionAnimation = StartCoroutine (TriggerCollisionAnimation (_playerRenderer.material.color));
 			}
-		}
+
 	}
 
 	IEnumerator TriggerCollisionAnimation (Color _targetColor)
