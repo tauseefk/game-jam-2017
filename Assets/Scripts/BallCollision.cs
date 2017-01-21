@@ -25,6 +25,7 @@ public class BallCollision : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_baseColor = _rend.material.color;
+		_originalColor = _rend.material.color;
 	}
 	
 	// Update is called once per frame
@@ -33,19 +34,22 @@ public class BallCollision : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other) {
-		if (LayerMask.NameToLayer ("Player") == other.gameObject.layer) {
+		if (LayerMask.NameToLayer ("Projectile") == other.gameObject.layer) {
 //			_playerRenderer = other.gameObject.GetComponent<Renderer>;
 			Shrink shrinkScript = other.gameObject.GetComponent<Shrink> ();
 			shrinkScript.enabled = true;
 		}
+		if (LayerMask.NameToLayer ("Targets") == other.gameObject.layer || LayerMask.NameToLayer ("Projectile") == other.gameObject.layer) {
 			if (_collisionAnimation != null) {
 				StopCoroutine (_collisionAnimation);
-//				_elapsedTime = 0f;
+				//				_elapsedTime = 0f;
 				_collisionAnimation = null;
 			} else {
-				_collisionAnimation = StartCoroutine (TriggerCollisionAnimation (_playerRenderer.material.color));
+				Renderer otherRend = other.gameObject.GetComponent<Renderer> ();
+				_originalColor = _rend.material.color;
+				_collisionAnimation = StartCoroutine (TriggerCollisionAnimation (otherRend.material.color));
 			}
-
+		}
 	}
 
 	IEnumerator TriggerCollisionAnimation (Color _targetColor)
@@ -54,9 +58,9 @@ public class BallCollision : MonoBehaviour {
 		{
 			_elapsedTime += Time.deltaTime;
 			float lerp = (_speed * _elapsedTime) / _duration;
-			if (lerp >= 0.8f)
-				yield break;
-			_rend.material.color = Color.Lerp(_baseColor, _targetColor * _emission, lerp);
+//			if (lerp >= 0.5f)
+//				yield break;
+			_rend.material.color = Color.Lerp(_originalColor, _targetColor, lerp);
 			yield return null;
 		}
 	}

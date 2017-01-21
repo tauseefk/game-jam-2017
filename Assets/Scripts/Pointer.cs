@@ -5,8 +5,14 @@ using UnityEngine;
 public class Pointer : MonoBehaviour {
 
     // Atom to fire
-    [SerializeField]
     GameObject _playerAtom;
+
+	[SerializeField]
+	GameObject _playerAtomPrefab;
+
+	[SerializeField]
+	Transform _playerContainer;
+
     Rigidbody _playerAtomRB;
 
     // Radius between pointer and player atom
@@ -32,15 +38,14 @@ public class Pointer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        _center = _playerAtom.transform;
+		_center = _playerContainer;
         transform.position = (transform.position - _center.position).normalized * _radius + _center.position;
-        _playerAtomRB = _playerAtom.GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        transform.LookAt(_playerAtom.transform);
+        transform.LookAt(_playerContainer);
 
         if(Input.GetKey(KeyCode.LeftArrow))
         {
@@ -64,8 +69,10 @@ public class Pointer : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if(Input.GetKey(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
+			_playerAtom = Instantiate (_playerAtomPrefab, _playerContainer);
+			_playerAtomRB = _playerAtom.GetComponent<Rigidbody>();
             _playerAtomRB.AddForce((_center.position - transform.position).normalized * _atomForce);
         }
     }
