@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collision : MonoBehaviour {
+public class WaveProgression : MonoBehaviour {
 
 	[SerializeField]
 	private Renderer _rend;
@@ -26,15 +26,15 @@ public class Collision : MonoBehaviour {
 	void Start () {
 		_baseColor = _rend.material.color;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	void OnTriggerEnter(Collider other) {
 		if (LayerMask.NameToLayer("Player") == other.gameObject.layer) {
-//			_playerRenderer = other.gameObject.GetComponent<Renderer>;
+			//			_playerRenderer = other.gameObject.GetComponent<Renderer>;
 			if (_collisionAnimation != null) {
 				StopCoroutine (_collisionAnimation);
 				_elapsedTime = 0f;
@@ -52,8 +52,6 @@ public class Collision : MonoBehaviour {
 		{
 			_elapsedTime += Time.deltaTime;
 			float lerp = (_speed * _elapsedTime) / _duration;
-			if (lerp >= .5f)
-				yield break;
 			_rend.material.color = Color.Lerp(_baseColor, _targetColor * _emission, lerp);
 			yield return null;
 		}
