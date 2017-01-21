@@ -44,11 +44,11 @@ public class ProjectileShooter : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		if(Input.GetKeyDown(KeyCode.Space))
+		if(Input.GetMouseButtonDown(0))
 		{
-			_playerAtom = Instantiate (_playerAtomPrefab, transform.parent);
+			_playerAtom = Instantiate (_playerAtomPrefab, transform.position, Quaternion.identity, transform.parent);
 			_playerAtomRB = _playerAtom.GetComponent<Rigidbody>();
-			_playerAtomRB.AddForce((transform.forward).normalized * _atomForce);
+			_playerAtomRB.AddForce((gameObject.GetComponentInChildren<Camera>().transform.forward).normalized * _atomForce);
 		}
 	}
 }
