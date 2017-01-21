@@ -54,7 +54,8 @@ public class Pointer : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.RotateAround(_center.position, -(_yAxis), _rotationSpeed * Time.deltaTime);        }
+            transform.RotateAround(_center.position, -(_yAxis), _rotationSpeed * Time.deltaTime);
+		}
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
@@ -71,7 +72,7 @@ public class Pointer : MonoBehaviour {
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-			_playerAtom = Instantiate (_playerAtomPrefab, _playerContainer);
+			_playerAtom = Instantiate (_playerAtomPrefab, _playerContainer.parent);
 			_playerAtomRB = _playerAtom.GetComponent<Rigidbody>();
             _playerAtomRB.AddForce((_center.position - transform.position).normalized * _atomForce);
         }
