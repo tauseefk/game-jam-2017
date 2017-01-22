@@ -8,6 +8,9 @@ public class BallCollision : MonoBehaviour {
 	private Renderer _rend;
     private MeshRenderer _neuronRenderer;
 
+    [SerializeField]
+    AudioClip neuronZap;
+
     private Neuron _neuron;
 
 	[SerializeField]
@@ -49,7 +52,10 @@ public class BallCollision : MonoBehaviour {
 			shrinkScript.enabled = true;
 		}
 		if (LayerMask.NameToLayer ("Targets") == other.gameObject.layer || LayerMask.NameToLayer ("Projectile") == other.gameObject.layer) {
-			if (_collisionAnimation != null) {
+
+            GetComponent<AudioSource>().PlayOneShot(neuronZap);
+
+            if (_collisionAnimation != null) {
 				StopCoroutine (_collisionAnimation);
 				//				_elapsedTime = 0f;
 				_collisionAnimation = null;

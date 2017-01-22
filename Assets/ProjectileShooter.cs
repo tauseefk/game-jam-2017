@@ -14,6 +14,9 @@ public class ProjectileShooter : MonoBehaviour {
 
 	Rigidbody _playerAtomRB;
 
+    [SerializeField]
+    AudioClip _blastSound;
+
 	// Radius between pointer and player atom
 	[SerializeField]
 	float _radius;
@@ -45,6 +48,7 @@ public class ProjectileShooter : MonoBehaviour {
 	{
 		if(Input.GetMouseButtonDown(0))
 		{
+            GetComponent<AudioSource>().PlayOneShot(_blastSound);
 			_playerAtom = Instantiate (_playerAtomPrefab, transform.position, Quaternion.identity, transform.parent);
 			_playerAtomRB = _playerAtom.GetComponent<Rigidbody>();
 			_playerAtomRB.AddForce((gameObject.GetComponentInChildren<Camera>().transform.forward).normalized * _atomForce);
