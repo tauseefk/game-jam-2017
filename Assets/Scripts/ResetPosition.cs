@@ -5,7 +5,7 @@ using UnityEngine;
 public class ResetPosition : MonoBehaviour {
 
 	[SerializeField]
-	private float _seconds = 3F;
+	private float _seconds = 2F;
 
 	private Coroutine _deleting;
 

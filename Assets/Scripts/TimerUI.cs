@@ -9,6 +9,12 @@ public class TimerUI : MonoBehaviour {
 	private Text _timerLabel;
 
 	[SerializeField]
+	private Text _devilScore;
+
+	[SerializeField]
+	private Text _angelScore;
+
+	[SerializeField]
 	private GameObject _transitionCanvas;
 
 	[SerializeField]
@@ -29,6 +35,8 @@ public class TimerUI : MonoBehaviour {
 	private float _scoreCount = 0F;
 
 	private Coroutine _scoreCoroutine;
+
+	private int _tempScore = 0;
 
 	[SerializeField]
 	private int _playerNumber = 1;
@@ -58,7 +66,28 @@ public class TimerUI : MonoBehaviour {
         }
         
         //update the label value
-        _timerLabel.text = string.Format("{0:00} : {1:00}", "00", _timeRemaining);
+		_tempScore = 0;
+		foreach (GameObject neuron in _neurons) {
+			if (neuron.GetComponent<Renderer> ().material.color == _playerRend.sharedMaterial.color) {
+				_tempScore++;
+			}
+		}
+		//update the label value
+		_timerLabel.text = string.Format("{0:00} : {1:00}", "00", _timeRemaining);
+		if (_playerNumber == 1) {
+			if (GameState.devilScore > 0) {
+				_devilScore.text = string.Format ("{0}", GameState.devilScore);
+			} else {
+				_devilScore.text = string.Format ("{0}", _tempScore);
+			}
+		} else {
+			_devilScore.text = string.Format ("{0}", GameState.devilScore);
+			if (GameState.angelScore > 0) {
+				_angelScore.text = string.Format ("{0}", GameState.angelScore);
+			} else {
+				_angelScore.text = string.Format ("{0}", _tempScore);
+			}
+		}
 	}
 
 	IEnumerator CalculateScore() {
@@ -70,11 +99,6 @@ public class TimerUI : MonoBehaviour {
 					GameState.incrementAngelScore ();
 				}
 			}
-		}
-		if (_playerNumber == 1) {
-			Debug.Log (GameState.devilScore);
-		} else {
-			Debug.Log (GameState.angelScore);
 		}
 		yield return null;
 	}

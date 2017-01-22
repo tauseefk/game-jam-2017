@@ -46,7 +46,7 @@ public class ProjectileShooter : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		if(Input.GetMouseButtonDown(0))
+		if(Input.GetMouseButton(0))
 		{
             GetComponent<AudioSource>().PlayOneShot(_blastSound);
 			_playerAtom = Instantiate (_playerAtomPrefab, transform.position, Quaternion.identity, transform.parent);

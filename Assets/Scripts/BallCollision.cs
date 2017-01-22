@@ -53,7 +53,7 @@ public class BallCollision : MonoBehaviour {
 		}
 		if (LayerMask.NameToLayer ("Targets") == other.gameObject.layer || LayerMask.NameToLayer ("Projectile") == other.gameObject.layer) {
 
-            GetComponent<AudioSource>().PlayOneShot(neuronZap);
+//            GetComponent<AudioSource>().PlayOneShot(neuronZap);
 
             if (_collisionAnimation != null) {
 				StopCoroutine (_collisionAnimation);
