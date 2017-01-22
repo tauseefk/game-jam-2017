@@ -28,6 +28,9 @@ public class TimerUI : MonoBehaviour {
 	private Coroutine _scoreCoroutine;
 
 	[SerializeField]
+	private int _playerNumber = 1;
+
+	[SerializeField]
 	private Renderer _playerRend;
 
 	void Start() {
@@ -52,8 +55,17 @@ public class TimerUI : MonoBehaviour {
 	IEnumerator CalculateScore() {
 		foreach (GameObject neuron in _neurons) {
 			if (neuron.GetComponent<Renderer> ().material.color == _playerRend.sharedMaterial.color) {
-				_scoreCount++;
+				if (_playerNumber == 1) {
+					GameState.incrementDevilScore ();
+				} else {
+					GameState.incrementAngelScore ();
+				}
 			}
+		}
+		if (_playerNumber == 1) {
+			Debug.Log (GameState.devilScore);
+		} else {
+			Debug.Log (GameState.angelScore);
 		}
 		yield return null;
 	}
