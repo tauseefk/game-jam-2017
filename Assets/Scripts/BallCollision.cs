@@ -86,7 +86,7 @@ public class BallCollision : MonoBehaviour {
 
     IEnumerator TriggerNeuronCollisionAnimation(Color _targetColor)
     {
-        while (_neuronRenderer.material.color != _targetColor)
+        while (_neuron.GetMKGlowColor() != _targetColor)
         {
             _elapsedTime += Time.deltaTime;
             float lerp = (_speed * _elapsedTime) / _duration;

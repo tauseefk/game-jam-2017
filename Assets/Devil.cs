@@ -23,7 +23,6 @@ public class Devil : MonoBehaviour {
 
     public void AnimationEnd()
     {
-        print("HELLO!");
         animator.SetBool("Click", false);
     }
 }
