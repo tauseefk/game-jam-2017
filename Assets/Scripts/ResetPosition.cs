@@ -26,7 +26,7 @@ public class ResetPosition : MonoBehaviour {
 
 	void OnCollisionEnter( Collision other ) {
 		if (LayerMask.NameToLayer ("Boundary") == other.gameObject.layer || LayerMask.NameToLayer ("Targets") == other.gameObject.layer || LayerMask.NameToLayer ("Projectile") == other.gameObject.layer) {
-			GetComponent<Shrink> ().enabled = true;
+ 			GetComponent<Shrink> ().enabled = true;
 		}
 	}
 }

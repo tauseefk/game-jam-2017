@@ -10,7 +10,6 @@ public class ProjectileShooter : MonoBehaviour {
 	[SerializeField]
 	GameObject _playerAtomPrefab;
 
-	[SerializeField]
 	Transform _playerContainer;
 
 	Rigidbody _playerAtomRB;
