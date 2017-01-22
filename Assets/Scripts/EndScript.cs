@@ -29,4 +29,13 @@ public class EndScript : MonoBehaviour {
         mt = (MovieTexture)rim.mainTexture;
         mt.Play();
     }
+
+    void Update()
+    {
+        // Close game after video
+        if(!mt.isPlaying)
+        {
+            Application.Quit();
+        }
+    }
 }
