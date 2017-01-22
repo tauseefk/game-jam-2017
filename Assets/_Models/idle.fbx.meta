@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 0dfe9c63495ce3041bcef7374cfb4780
-timeCreated: 1485062850
+guid: 3f9bec77c98dbb5449a9892121020898
+timeCreated: 1485062739
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: default
+    100000: default
+    100002: //RootNode
     100004: mixamorig:Head
     100006: mixamorig:HeadTop_End
     100008: mixamorig:Hips
@@ -41,9 +41,8 @@ ModelImporter:
     100066: mixamorig:Spine1
     100068: mixamorig:Spine2
     100070: pCube1
-    100072: pTorus1
-    400000: //RootNode
-    400002: default
+    400000: default
+    400002: //RootNode
     400004: mixamorig:Head
     400006: mixamorig:HeadTop_End
     400008: mixamorig:Hips
@@ -78,16 +77,13 @@ ModelImporter:
     400066: mixamorig:Spine1
     400068: mixamorig:Spine2
     400070: pCube1
-    400072: pTorus1
     2300000: default
     3300000: default
     4300000: default
     4300002: pCube1
-    4300004: pTorus1
     7400000: mixamo.com
     9500000: //RootNode
     13700000: pCube1
-    13700002: pTorus1
   materials:
     importMaterials: 1
     materialName: 0
