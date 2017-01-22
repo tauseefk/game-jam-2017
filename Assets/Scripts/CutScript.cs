@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class CutScript : MonoBehaviour {
 
     [SerializeField]
-    Image image;
-
     AudioSource audioSrc;
 
 	// Use this for initialization
 	void Start () {
         audioSrc = GetComponent<AudioSource>();
+        audioSrc.time = 11.0f;
+        // Start audio at correct time with last scene
+        audioSrc.Play();
 	}
 	
 	// Update is called once per frame
