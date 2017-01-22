@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EndScript : MonoBehaviour {
 
     [SerializeField]
-    GameObject good, bad;
+    GameObject good, bad, credits;
 
     RawImage rim;
     MovieTexture mt;
+
+    bool playedEnding, playedCredits;
 
 	// Use this for initialization
 	void Start () {
@@ -32,10 +35,33 @@ public class EndScript : MonoBehaviour {
 
     void Update()
     {
-        // Close game after video
-        if(!mt.isPlaying)
+        // If player is not playing and ending hasnt been played
+        if(!mt.isPlaying && !playedEnding)
         {
-            Application.Quit();
+            playedEnding = true;
+
+            // If ending has been played
+            if(playedEnding)
+            {
+                if(!playedCredits)
+                {
+                    playedCredits = true;
+
+                    good.SetActive(false);
+                    bad.SetActive(false);
+                    credits.SetActive(true);
+
+                    rim = credits.GetComponent<RawImage>();
+                    mt = (MovieTexture)rim.mainTexture;
+                    mt.Play();
+                }
+            }
+        }
+
+        // If the ending and credits have been played
+        if (!mt.isPlaying && playedEnding && playedCredits)
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }
