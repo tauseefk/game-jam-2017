@@ -14,6 +14,9 @@ public class TimerUI : MonoBehaviour {
 	[SerializeField]
 	private GameObject _neuronContainer;
 
+    [SerializeField]
+    AudioSource _bgAudioSrc;
+
 	[SerializeField]
 	private float _timerLength = 30F;
 
@@ -48,8 +51,10 @@ public class TimerUI : MonoBehaviour {
 			}
 			_transitionCanvas.SetActive (true);
 		}
-		//update the label value
-		_timerLabel.text = string.Format("{0:00} : {1:00}", "00", _timeRemaining);
+        // Save current position of audio
+        GameState.audioTime = _bgAudioSrc.time;
+        //update the label value
+        _timerLabel.text = string.Format("{0:00} : {1:00}", "00", _timeRemaining);
 	}
 
 	IEnumerator CalculateScore() {

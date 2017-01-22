@@ -9,6 +9,7 @@ public class GameState : MonoBehaviour
 
 	public static int devilScore { get; private set; }
 	public static int angelScore { get; private set; }
+    public static float audioTime { get; set; }
 
 
 	void Start()
