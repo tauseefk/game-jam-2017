@@ -61,7 +61,7 @@ public class EndScript : MonoBehaviour {
         // If the ending and credits have been played
         if (!mt.isPlaying && playedEnding && playedCredits)
         {
-            SceneManager.LoadScene("StartScene");
+            SceneManager.LoadScene(0);
         }
     }
 }
