@@ -52,7 +52,11 @@ public class TimerUI : MonoBehaviour {
 			_transitionCanvas.SetActive (true);
 		}
         // Save current position of audio
-        GameState.audioTime = _bgAudioSrc.time;
+        if(_bgAudioSrc != null)
+        {
+            GameState.audioTime = _bgAudioSrc.time;
+        }
+        
         //update the label value
         _timerLabel.text = string.Format("{0:00} : {1:00}", "00", _timeRemaining);
 	}
