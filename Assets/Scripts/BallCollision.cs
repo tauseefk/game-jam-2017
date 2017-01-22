@@ -14,6 +14,7 @@ public class BallCollision : MonoBehaviour {
 	private Renderer _playerRenderer;
 
 	private float _elapsedTime = 0f;
+	private float _elapsedTimeNeuron = 0F;
 	private Color _baseColor = Color.red;
 	private Color _originalColor;
 	private float _duration = 1.0F;
@@ -64,9 +65,9 @@ public class BallCollision : MonoBehaviour {
                 _neuronCollisionAnimation = null;
             } else
             {
-                Renderer otherRend = other.gameObject.GetComponent<Renderer>();
+                Renderer neuronRend = other.gameObject.GetComponent<Renderer>();
                 _originalNeuronColor = _neuron.GetMKGlowColor();
-                _neuronCollisionAnimation = StartCoroutine(TriggerNeuronCollisionAnimation(otherRend.material.color));
+				_neuronCollisionAnimation = StartCoroutine(TriggerNeuronCollisionAnimation(neuronRend.material.color));
             }
 		}
 	}
@@ -88,8 +89,8 @@ public class BallCollision : MonoBehaviour {
     {
         while (_neuron.GetMKGlowColor() != _targetColor)
         {
-            _elapsedTime += Time.deltaTime;
-            float lerp = (_speed * _elapsedTime) / _duration;
+            _elapsedTimeNeuron += Time.deltaTime;
+			float lerp = (_speed * _elapsedTimeNeuron) / _duration;
             //			if (lerp >= 0.5f)
             //				yield break;
             _neuron.SetMKGlowColor(Color.Lerp(_originalNeuronColor, _targetColor, lerp));
